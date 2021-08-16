@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import NexmoClient
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVAudioSession.sharedInstance().requestRecordPermission { (granted:Bool) in
             NSLog("Allow microphone use. Response: %d", granted)
         }
+
+        let clientConfig = NXMClientConfig(
+            apiUrl: "https://api.nexmo.com/",
+            websocketUrl: "https://ws.nexmo.com/",
+            ipsUrl: "https://api.dev.nexmoinc.net/play4/v1/image",
+            useFirstIceCandidate: true
+        )
+        NXMClient.setConfiguration(clientConfig)
+
         return true
     }
 
